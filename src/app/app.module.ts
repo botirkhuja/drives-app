@@ -42,7 +42,7 @@ import { LoginComponent } from './login/login.component';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([AppEffects]),
     StoreRouterConnectingModule.forRoot(),
-    AngularFireModule.initializeApp(environment.firebase, 'Drives App'),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
   ],
