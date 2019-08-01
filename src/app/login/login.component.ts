@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +18,11 @@ export class LoginComponent implements OnInit {
     ])
   )
 
-  constructor() { }
+  constructor(private auth: AngularFireAuth) { }
 
   ngOnInit() {
+    window['recaptchaVerifier'] = new auth.RecaptchaVerifier('recaptcha-container');
+    window['recaptchaVerifier'].render();
   }
 
 }

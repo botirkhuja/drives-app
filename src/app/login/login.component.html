@@ -1,15 +1,15 @@
 <form class="flex column">
     <div class="flex row justify-content-center">
-        <mat-form-field appearance="outline" >
+        <mat-form-field appearance="outline">
             <mat-label>Phone Number</mat-label>
             <mat-icon matSuffix>phone</mat-icon>
-            <mat-hint>No Space</mat-hint>
-            <mat-error>In2014 toyota camryclude area code</mat-error>
-            <input matInput placeholder="123 456 7890" type="tel"
-                [formControl]="phoneNumber">
+            <mat-hint>Include area code and no space</mat-hint>
+            <mat-error>Check your number again</mat-error>
+            <input matInput placeholder="123 456 7890" type="tel" [formControl]="phoneNumber">
         </mat-form-field>
     </div>
     <div class="flex row justify-content-center">
-        <button mat-stroked-button color="primary" [disabled]="phoneNumber.invalid">LOGIN</button>
+        <button mat-stroked-button color="primary" [disabled]="phoneNumber.invalid" id="login">LOGIN</button>
     </div>
 </form>
+<div id="recaptcha-container"></div>

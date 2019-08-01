@@ -5,10 +5,31 @@
             <mat-icon matSuffix>phone</mat-icon>
             <mat-hint>No Space</mat-hint>
             <mat-error>Include area code</mat-error>
-            <input matInput placeholder="123 456 7890" type="tel" [formControl]="phoneNumber">
+            <input matInput placeholder="123 456 7890" type="tel" [formControl]="signupForm">
         </mat-form-field>
     </div>
     <div class="flex row justify-content-center">
-        <button mat-stroked-button color="primary" [disabled]="phoneNumber.invalid">LOGIN</button>
+        <button mat-stroked-button color="primary" [disabled]="signupForm.invalid">SIGN UP</button>
     </div>
 </form>
+
+<!-- <form class="flex column">
+    <div class="flex row justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-hint>example@url.origin</mat-hint>
+        <mat-error>Incorrect email address</mat-error>
+        <input matInput placeholder="Type here" type="email">
+      </mat-form-field>
+    </div>
+    <div class="flex row justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <mat-icon matSuffix>lock</mat-icon>
+        <mat-hint>Account Password</mat-hint>
+        <mat-error>Incorrect password</mat-error>
+        <input matInput placeholder="Type here" type="password">
+      </mat-form-field>
+    </div>
+  </form> -->
