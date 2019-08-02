@@ -1,35 +1,27 @@
-<form class="flex column">
+<div class="flex column">
     <div class="flex row justify-content-center">
-        <mat-form-field appearance="outline" >
+        <mat-form-field appearance="outline">
             <mat-label>Phone Number</mat-label>
             <mat-icon matSuffix>phone</mat-icon>
-            <mat-hint>No Space</mat-hint>
-            <mat-error>Include area code</mat-error>
-            <input matInput placeholder="123 456 7890" type="tel"
-                [formControl]="phoneNumber">
+            <mat-hint>Include area code and no space</mat-hint>
+            <mat-error>{{phoneNumberErrorMessage}}</mat-error>
+            <input matInput placeholder="123 456 7890" type="tel" [formControl]="phoneNumber">
         </mat-form-field>
     </div>
     <div class="flex row justify-content-center">
-        <button mat-stroked-button color="primary" [disabled]="phoneNumber.invalid" (click)="sendLoginCode()">LOGIN</button>
+        <!-- <button mat-stroked-button color="primary" [disabled]="phoneNumber.invalid" (click)="sendLoginCode()">LOGIN</button> -->
+        <button mat-stroked-button color="primary" id="sign-in-button">SIGN IN</button>
     </div>
-    <div *ngIf="windowRef.confirmationResult">
-      <label for="code">Enter verification code</label>
-      <mat-form-field appearance="outline" >
-        <mat-label>Verification Code</mat-label>
-        <mat-icon matSuffix>code</mat-icon>
-        <mat-hint></mat-hint>
-        <mat-error>Code is incorrect</mat-error>
-        <input matInput placeholder="1234567890" type="number" [(ngModel)]="verificationCode" name="code">
-    </mat-form-field>
-    <div class="flex row justify-content-center">
-      <button mat-stroked-button color="warn" (click)="verifyLoginCode()">Verify</button>
+    <div class="flex row justify-content-center" *ngIf="windowRef.confirmationResult">
+        <mat-form-field appearance="outline">
+            <mat-label>Verification Code</mat-label>
+            <mat-icon matSuffix>code</mat-icon>
+            <mat-hint>Enter the you you received</mat-hint>
+            <mat-error>Code is incorrect</mat-error>
+            <input matInput placeholder="123456" type="number" [(ngModel)]="verificationCode" name="code">
+        </mat-form-field>
     </div>
-  </div>
-</form>
-<div id="recaptcha-widget"></div>
-
-<div *ngIf="user">
-  Loged In:
-  <br>
-  USERID: {{ user?.uid }}
+    <div class="flex row justify-content-center" *ngIf="windowRef.confirmationResult">
+        <button mat-stroked-button color="primary" (click)="verifyLoginCode()">Verify</button>
+    </div>
 </div>

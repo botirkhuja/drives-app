@@ -4,18 +4,6 @@ import { auth } from 'firebase/app'
 import { WindowService } from '../window.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 
-export class PhoneNumber {
-  country: string;
-  area: string;
-  prefix: string;
-  line: string;
-
-  get e164() {
-    const num = this.country + this.area + this.prefix + this.line;
-    return `+${num}`;
-  }
-}
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -30,9 +18,9 @@ export class LoginComponent implements OnInit {
       Validators.pattern(this.phoneNumberRegex)
     ])
   )
+  phoneNumberErrorMessage: string;
 
   windowRef: any;
-  phoneN = new PhoneNumber();
 
   verificationCode: number;
   user: any;
@@ -41,9 +29,31 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.windowRef = this.windowS.windowRef;
-    this.windowRef.recatpchaVerifier = new auth.RecaptchaVerifier('recaptcha-widget');
-    this.windowRef.recatpchaVerifier.render();
+    // this.windowRef.recatpchaVerifier = new auth.RecaptchaVerifier('recaptcha-widget');
+    this.windowRef.recatpchaVerifier = new auth.RecaptchaVerifier('sign-in-button', {
+      'size': 'invisible',
+      'callback': () => this.sendLoginCode()
+    });
+    
+    (this.windowRef.recatpchaVerifier as auth.RecaptchaVerifier).render()
+      .then( widgetId => {
+        this.windowRef.recaptchaWidgetId = widgetId;
+      });
+    
+    this.afAuth.user.subscribe( user => {
+      console.log('user', user);
+    })
   }
+
+  // ngAfterViewInit(): void {
+  //   this.phoneNumber.valueChanges.subscribe(() => {
+  //     if(this.phoneNumber.valid) {
+  //     } else if (this.windowRef.recatpchaVerifier) {
+  //       (this.windowRef.recaptchaVerifier as auth.RecaptchaVerifier).clear()
+  //     }
+  //   })
+    
+  // }
 
   sendLoginCode() {
     const appVerifier = this.windowRef.recatpchaVerifier;
@@ -53,20 +63,25 @@ export class LoginComponent implements OnInit {
         this.windowRef.confirmationResult = res;
         console.log('confirm phone', res);
       })
-      .catch( err => console.log('error:', err))
+      .catch( err => {
+        this.phoneNumberErrorMessage = err.message;
+        this.phoneNumber.markAsTouched();
+        (this.windowRef.recaptchaVerifier as auth.RecaptchaVerifier).render();
+      })
   }
 
   verifyLoginCode() {
-    console.log('code is',this.verificationCode)
     this.windowRef.confirmationResult
       .confirm(this.verificationCode.toString())
       .then( res => {
-        this.user = res.user;
         console.log('user:', res)
       })
       .catch( err => {
-        console.log('verify error', err)
+        console.log('verify error', err);
       })
   }
 
+  signOut(event) {
+    this.afAuth.auth.signOut();
+  }
 }

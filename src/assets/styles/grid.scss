@@ -1,13 +1,19 @@
+.w-100 {
+  width: 100%;
+}
+
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .row {
-    flex-direction: row;
+  flex-direction: row;
 }
 
 .column {
-    flex-direction: column;
+  flex-direction: column;
 }
 
-.
+.justify-content-center {
+  justify-content: center;
+}
