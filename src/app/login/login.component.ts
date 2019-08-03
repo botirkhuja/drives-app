@@ -34,15 +34,11 @@ export class LoginComponent implements OnInit {
       'size': 'invisible',
       'callback': () => this.sendLoginCode()
     });
-    
+
     (this.windowRef.recatpchaVerifier as auth.RecaptchaVerifier).render()
       .then( widgetId => {
         this.windowRef.recaptchaWidgetId = widgetId;
       });
-    
-    this.afAuth.user.subscribe( user => {
-      console.log('user', user);
-    })
   }
 
   // ngAfterViewInit(): void {
@@ -52,7 +48,7 @@ export class LoginComponent implements OnInit {
   //       (this.windowRef.recaptchaVerifier as auth.RecaptchaVerifier).clear()
   //     }
   //   })
-    
+
   // }
 
   sendLoginCode() {
