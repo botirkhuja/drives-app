@@ -41,23 +41,12 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  // ngAfterViewInit(): void {
-  //   this.phoneNumber.valueChanges.subscribe(() => {
-  //     if(this.phoneNumber.valid) {
-  //     } else if (this.windowRef.recatpchaVerifier) {
-  //       (this.windowRef.recaptchaVerifier as auth.RecaptchaVerifier).clear()
-  //     }
-  //   })
-
-  // }
-
   sendLoginCode() {
     const appVerifier = this.windowRef.recatpchaVerifier;
     const num = `+1${this.phoneNumber.value}`;
     this.afAuth.auth.signInWithPhoneNumber(num, appVerifier)
       .then(res => {
         this.windowRef.confirmationResult = res;
-        console.log('confirm phone', res);
       })
       .catch( err => {
         this.phoneNumberErrorMessage = err.message;
@@ -69,12 +58,6 @@ export class LoginComponent implements OnInit {
   verifyLoginCode() {
     this.windowRef.confirmationResult
       .confirm(this.verificationCode.toString())
-      .then( res => {
-        console.log('user:', res)
-      })
-      .catch( err => {
-        console.log('verify error', err);
-      })
   }
 
   signOut(event) {
