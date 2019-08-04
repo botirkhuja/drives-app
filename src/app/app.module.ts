@@ -21,6 +21,10 @@ import { LoginComponent } from './login/login.component';
 import { LandingComponent } from './landing/landing.component';
 import { AdminComponent } from './admin/admin.component';
 import { CustomSerializer } from './custom-route-serializer';
+import { SideMenuComponent } from './side-menu/side-menu.component';
+import { DriversComponent } from './drivers/drivers.component';
+import { SignoutComponent } from './signout/signout.component';
+import { TripsComponent } from './trips/trips.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { CustomSerializer } from './custom-route-serializer';
     SignupComponent,
     LoginComponent,
     LandingComponent,
-    AdminComponent
+    AdminComponent,
+    SideMenuComponent,
+    DriversComponent,
+    SignoutComponent,
+    TripsComponent
   ],
   imports: [
     BrowserModule,

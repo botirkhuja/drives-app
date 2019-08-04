@@ -6,15 +6,32 @@ import {
   MetaReducer
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
-import { routerReducer } from '@ngrx/router-store';
+import * as fromRouter from '@ngrx/router-store';
+import { RouterStateUrl } from '../custom-route-serializer';
 
-export interface State {
-
+export interface AppState {
+  router: fromRouter.RouterReducerState<RouterStateUrl>;
 }
 
-export const reducers: ActionReducerMap<State> = {
-  router: routerReducer
+export const reducers: ActionReducerMap<AppState> = {
+  router: fromRouter.routerReducer
 };
 
+export const selectRouter = createFeatureSelector<
+  AppState,
+  fromRouter.RouterReducerState<RouterStateUrl>
+>('router');
 
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
+const {
+  selectQueryParams,    // select the current route query params
+  // selectQueryParam,     // factory function to select a query param
+  selectRouteParams,    // select the current route params
+  // selectRouteParam,     // factory function to select a route param
+  selectRouteData,      // select the current route data
+  selectUrl,            // select the current url
+} = fromRouter.getSelectors(selectRouter);
+
+// export const selectRouteId = selectRouteParam('id');
+// export const selectStatus = selectQueryParam('status');
+
+export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [] : [];

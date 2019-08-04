@@ -1,13 +1,21 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <button mat-button (click)="sidenav.toggle()">
-            <mat-icon>menu</mat-icon>
-        </button>
-    </mat-toolbar-row>
-</mat-toolbar>
-<mat-sidenav-container>
-    <mat-sidenav #sidenav [opened]="true">Start</mat-sidenav>
-    <mat-sidenav-content>
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+<div class="landing-container">
+  <mat-toolbar color="primary" class="landing-toolbar">
+      <mat-toolbar-row>
+          <button mat-button (click)="sidenav.toggle()">
+              <mat-icon>menu</mat-icon>
+          </button>
+      </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-sidenav-container class="landing-sidenav-container">
+      <mat-sidenav
+        #sidenav
+        [mode]="mobileQuery.matches ? 'over' : 'side'"
+        [fixedInViewport]="mobileQuery.matches"
+        fixedTopGap="56"
+      ><app-side-menu></app-side-menu>
+      </mat-sidenav>
+      <mat-sidenav-content>
+          <router-outlet></router-outlet>
+      </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
