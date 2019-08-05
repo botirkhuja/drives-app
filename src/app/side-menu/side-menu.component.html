@@ -1,6 +1,5 @@
 <mat-nav-list>
-  <a mat-list-item routerLink="drivers">Drivers</a>
-  <a mat-list-item routerLink="trips">Trips</a>
-  <a mat-list-item routerLink="signout">Sign Out</a>
-  <a mat-list-item routerLink="login">Login</a>
+  <ng-container *ngFor="let navigation of navigatableLinks">
+      <a mat-list-item [routerLink]="navigation.link">{{navigation.label}}</a>
+  </ng-container>
 </mat-nav-list>

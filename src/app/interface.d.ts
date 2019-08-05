@@ -11,3 +11,8 @@ declare module DriverI {
     driver: boolean;
   }
 }
+
+interface NavigatableLink {
+  link: string;
+  label: string;
+}

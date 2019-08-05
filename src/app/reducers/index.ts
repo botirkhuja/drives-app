@@ -6,15 +6,18 @@ import {
   MetaReducer
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
+import * as fromApp from './app.reducer';
 import * as fromRouter from '@ngrx/router-store';
 import { RouterStateUrl } from '../custom-route-serializer';
 
 export interface AppState {
   router: fromRouter.RouterReducerState<RouterStateUrl>;
+  app: fromApp.State;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  router: fromRouter.routerReducer
+  router: fromRouter.routerReducer,
+  app: fromApp.reducer,
 };
 
 export const selectRouter = createFeatureSelector<
@@ -30,6 +33,13 @@ const {
   selectRouteData,      // select the current route data
   selectUrl,            // select the current url
 } = fromRouter.getSelectors(selectRouter);
+
+export const appSelector = (state: AppState) => state.app;
+
+export const driverInfoSelector = createSelector(
+  appSelector,
+  state => state.driver
+)
 
 // export const selectRouteId = selectRouteParam('id');
 // export const selectStatus = selectQueryParam('status');

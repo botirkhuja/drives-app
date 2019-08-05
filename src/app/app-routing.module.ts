@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { LandingComponent } from './landing/landing.component';
@@ -29,7 +30,8 @@ const routes: Routes = [
   },
   {
     path: 'trips',
-    component: TripsComponent
+    component: TripsComponent,
+    canActivate: [AngularFireAuthGuard]
   },
   {
     path: 'signout',

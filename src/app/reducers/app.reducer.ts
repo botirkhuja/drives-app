@@ -1,24 +1,19 @@
-// import { Action, createReducer, on } from '@ngrx/store';
-// import * as ScoreboardPageActions from '../actions/scoreboard-page.actions';
+import { Action, createReducer, on } from '@ngrx/store';
+import { storeDriverInformation } from '../actions/app.actions';
 
-// export interface State {
-//   home: number;
-//   away: number;
-// }
+export interface State {
+    driver: DriverI.Info;
+}
 
-// const initialState: State = {
-//   home: 0,
-//   away: 0,
-// };
+const initialState: State = {
+    driver: null,
+};
 
-// const createdReducer = createReducer(
-//   initialState,
-//   on(ScoreboardPageActions.homeScore, state => ({ ...state, home: state.home + 1 })),
-//   on(ScoreboardPageActions.awayScore, state => ({ ...state, away: state.away + 1 })),
-//   on(ScoreboardPageActions.resetScore, state => ({ home: 0, away: 0 })),
-//   on(ScoreboardPageActions.setScores, (state, { game }) => ({ home: game.home, away: game.away }))
-// );
+const createdReducer = createReducer(
+  initialState,
+  on(storeDriverInformation, (state, {payload}) => ({ ...state, driver: { ...payload } })),
+);
 
-// export function reducer(state: State | undefined, action: Action) {
-//   return createdReducer(state, action);
-// }
+export function reducer(state: State | undefined, action: Action) {
+  return createdReducer(state, action);
+}

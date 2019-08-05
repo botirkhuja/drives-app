@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../reducers';
-import { storeUserInformation } from '../actions/app.actions';
+import { storeDriverInformation } from '../actions/app.actions';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Subscription } from 'rxjs';
 
@@ -41,12 +41,17 @@ export class AuthService implements OnDestroy {
       this.afs.doc('drivers/'+this.user.phoneNumber).ref
         .get().then( doc => {
           // response.docs.forEach( doc => {
-          this.store.dispatch( storeUserInformation({ payload: doc.data() as DriverI.Info}))
+          this.store.dispatch( storeDriverInformation({ payload: doc.data() as DriverI.Info}))
           this.router.navigateByUrl('trips')
 
           // });
         }
       )
+  }
+
+  signUserOut(){
+    this.afAuth.auth.signOut();
+    this.router.navigateByUrl('login');
   }
 
   ngOnDestroy() {
