@@ -25,6 +25,7 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
 import { DriversComponent } from './drivers/drivers.component';
 import { SignoutComponent } from './signout/signout.component';
 import { TripsComponent } from './trips/trips.component';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,9 @@ import { TripsComponent } from './trips/trips.component';
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
   ],
-  providers: [],
+  providers: [
+    AngularFireAuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

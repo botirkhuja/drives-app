@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { LandingComponent } from './landing/landing.component';
@@ -8,7 +8,9 @@ import { DriversComponent } from './drivers/drivers.component';
 import { SignoutResolverService } from './auth/signout-resolver.service';
 import { SignoutComponent } from './signout/signout.component';
 import { TripsComponent } from './trips/trips.component';
+import { canActivate } from '@angular/fire/auth-guard';
 
+const redirectUnauthorizedToLogin = redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
   // {
@@ -31,7 +33,7 @@ const routes: Routes = [
   {
     path: 'trips',
     component: TripsComponent,
-    canActivate: [AngularFireAuthGuard]
+    ...canActivate(redirectUnauthorizedToLogin)
   },
   {
     path: 'signout',

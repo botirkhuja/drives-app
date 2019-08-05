@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../reducers';
-import { storeDriverInformation } from '../actions/app.actions';
+import { storeDriverInformation, storeAllDriversInformation } from '../actions/app.actions';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Subscription } from 'rxjs';
 
@@ -37,16 +37,35 @@ export class AuthService implements OnDestroy {
   }
 
   getUserInformation(){
-      // this.afs.collection('drivers', ref => ref.where('cell', '==', this.user.phoneNumber))
-      this.afs.doc('drivers/'+this.user.phoneNumber).ref
-        .get().then( doc => {
-          // response.docs.forEach( doc => {
-          this.store.dispatch( storeDriverInformation({ payload: doc.data() as DriverI.Info}))
-          this.router.navigateByUrl('trips')
+    // this.afs.collection('drivers', ref => ref.where('cell', '==', this.user.phoneNumber))
+    this.afs.doc('drivers/'+this.user.phoneNumber).ref
+      .get().then( doc => {
+        // response.docs.forEach( doc => {
+        this.store.dispatch( storeDriverInformation({ payload: doc.data() as DriverI.Info}))
+        this.router.navigateByUrl('trips')
+        this.watchForAllDrivers();
 
-          // });
+        // });
+      }
+    )
+  }
+
+  watchForAllDrivers(){
+    this.subscriptions.push(
+      this.afs.collection('drivers').snapshotChanges().subscribe(
+        response => {
+          const drivers = response.map(({payload}) => {
+            return payload.doc.data();
+          }) as DriverI.Info[];
+
+          this.store.dispatch( storeAllDriversInformation({ payload: drivers }))
+          console.log('dirvers collection', drivers);
+          // response.docs.forEach( doc => {
+          //   console.log('driver', doc.data())
+          // })
         }
       )
+    )
   }
 
   signUserOut(){

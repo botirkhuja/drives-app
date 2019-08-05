@@ -40,6 +40,10 @@ export const driverInfoSelector = createSelector(
   appSelector,
   state => state.driver
 )
+export const allDriverInfoSelector = createSelector(
+  appSelector,
+  state => state.drivers
+)
 
 // export const selectRouteId = selectRouteParam('id');
 // export const selectStatus = selectQueryParam('status');
