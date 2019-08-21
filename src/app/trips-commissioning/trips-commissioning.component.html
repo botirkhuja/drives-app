@@ -1,0 +1,20 @@
+<mat-selection-list #tripsList>
+  <h3 mat-subheader>Past Trips</h3>
+  <ng-container *ngIf="(trips$ | async) as trips else noTrips">
+    <mat-list-option *ngFor="let trip of trips" [value]="trip">
+      <mat-icon mat-list-icon>airport_shuttle</mat-icon>
+      <span mat-line> {{trip?.pickupDate | date:'MMMM d, y, h:mm a'}} </span>
+      <span mat-line>Pick Up: {{trip?.pickup}}</span>
+      <span mat-line> {{trip?.price | currency}} </span>
+    </mat-list-option>
+  </ng-container>
+</mat-selection-list>
+<!-- <mat-divider></mat-divider> -->
+<button class="w-100" *ngIf="isAdmin$ | async" mat-raised-button color="primary"
+  (click)="updateHandler(tripsList.selectedOptions.selected)">Add Commission</button>
+
+<ng-template #noTrips>
+  <mat-list-item>
+    <span>No trips available</span>
+  </mat-list-item>
+</ng-template>

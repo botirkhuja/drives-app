@@ -26,6 +26,14 @@ import { DriversComponent } from './drivers/drivers.component';
 import { SignoutComponent } from './signout/signout.component';
 import { TripsComponent } from './trips/trips.component';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { DriverComponent } from './driver/driver.component';
+import { TripInputComponent } from './trip-input/trip-input.component';
+import { TripComponent } from './trip/trip.component';
+import { DriverInputComponent } from './driver-input/driver-input.component';
+import { MenuComponent } from './menu/menu.component';
+import { CompensationInputComponent } from './compensation-input/compensation-input.component';
+import { TripsCommissioningComponent } from './trips-commissioning/trips-commissioning.component';
+import { TripsItemComponent } from './trips/trips-item/trips-item.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +45,15 @@ import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
     SideMenuComponent,
     DriversComponent,
     SignoutComponent,
-    TripsComponent
+    TripsComponent,
+    DriverComponent,
+    TripInputComponent,
+    TripComponent,
+    DriverInputComponent,
+    MenuComponent,
+    CompensationInputComponent,
+    TripsCommissioningComponent,
+    TripsItemComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +75,7 @@ import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
     EffectsModule.forRoot([AppEffects]),
     StoreRouterConnectingModule.forRoot({
       routerState: RouterState.Minimal,
-      serializer: CustomSerializer,
+      // serializer: CustomSerializer,
     }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features

@@ -1,1 +1,26 @@
-<p>trips works!</p>
+<mat-nav-list>
+  <ng-container *ngIf="futureTrips$ | async as trips">
+    <ng-container *ngIf="trips.length">
+      <h3 mat-subheader>Future Trips</h3>
+      <app-trips-item *ngFor="let trip of trips" [trip]="trip"></app-trips-item>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="trips$ | async as trips">
+    <ng-container *ngIf="trips.length">
+      <h3 mat-subheader>Today's Trips</h3>
+      <app-trips-item *ngFor="let trip of trips" [trip]="trip"></app-trips-item>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </ng-container>
+  <h3 mat-subheader>Past Trips</h3>
+  <ng-container *ngIf="pastTrips$ | async as trips else noTrips">
+    <app-trips-item *ngFor="let trip of trips" [trip]="trip"></app-trips-item>
+  </ng-container>
+</mat-nav-list>
+
+<ng-template #noTrips>
+  <mat-list-item>
+    <span>No trips available</span>
+  </mat-list-item>
+</ng-template>

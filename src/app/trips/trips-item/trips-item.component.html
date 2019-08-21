@@ -1,0 +1,8 @@
+<a mat-list-item [routerLink]="['/trip', trip.id]"
+  [ngClass]="{'commissioned': trip.commissioned}">
+  <mat-icon mat-list-icon>airport_shuttle</mat-icon>
+  <span mat-line> {{trip?.pickupDate | date:'MMMM d, y, h:mm a'}} </span>
+  <span mat-line>Pick Up: {{trip?.pickup}}</span>
+  <span mat-line *ngIf="!trip?.commissioned"> {{trip?.price | currency}} </span>
+  <span mat-line *ngIf="trip?.commissioned"> Commission Paid </span>
+</a>

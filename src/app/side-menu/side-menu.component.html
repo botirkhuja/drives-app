@@ -3,6 +3,6 @@
 </mat-card>
 <mat-nav-list>
   <ng-container *ngFor="let navigation of navigatableLinks">
-      <a mat-list-item [routerLink]="navigation.link">{{navigation.label}}</a>
+      <a mat-list-item [routerLink]="navigation.link" routerLinkActive="active">{{navigation.label}}</a>
   </ng-container>
 </mat-nav-list>

@@ -17,3 +17,36 @@
 .justify-content-center {
   justify-content: center;
 }
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.spacer {
+  width: 100%
+}
+
+.pt-1 {
+  padding-top: 8px;
+}
+
+.pl-1 {
+  padding-left: 8px;
+}
+
+.p-1 {
+  padding: 8px;
+}
+
+.sticky {
+  position: sticky;
+  z-index: 1;
+
+  &.top-0 {
+    top: 0;
+  }
+
+  &.bottom {
+    bottom: 0;
+  }
+}

@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class SignoutResolverService implements Resolve<any> {
+export class SignoutResolverService implements Resolve<boolean> {
 
   constructor(
     private authS: AuthService

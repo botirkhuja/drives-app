@@ -1,0 +1,35 @@
+<div class="flex justify-content-center">
+  <span>Enter Compensation</span>
+</div>
+<form class="flex column" [formGroup]="compensationForm" (ngSubmit)="addNewCompensation()">
+  <div class="flex row justify-content-center">
+    <mat-form-field appearance="outline">
+      <mat-label>Day and Time</mat-label>
+      <mat-error>Incorrect Day and Time</mat-error>
+      <input matInput type="datetime-local" formControlName="pickupDate">
+    </mat-form-field>
+  </div>
+  <div class="flex row justify-content-center">
+    <mat-form-field appearance="outline">
+      <mat-label>Car Type</mat-label>
+      <mat-icon matSuffix>directions_car</mat-icon>
+      <mat-hint>Minivan</mat-hint>
+      <mat-error>Input is Required</mat-error>
+      <input matInput type="text" formControlName="car">
+    </mat-form-field>
+  </div>
+  <div class="flex row justify-content-center">
+    <mat-form-field appearance="outline">
+      <mat-label>Phone Number</mat-label>
+      <mat-icon matSuffix>phone</mat-icon>
+      <mat-hint>Include area code and no space</mat-hint>
+      <mat-error>Check your number again</mat-error>
+      <input matInput placeholder="+1 123 456 7890" type="tel" formControlName="cell">
+    </mat-form-field>
+  </div>
+  <div class="flex row justify-content-center">
+    <button mat-raised-button color="primary" [disabled]="compensationForm.invalid" action="submit">
+      Add New Driver
+    </button>
+  </div>
+</form>

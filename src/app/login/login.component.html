@@ -1,27 +1,61 @@
-<div class="flex column">
-    <div class="flex row justify-content-center">
+<mat-vertical-stepper>
+  <mat-step label="Phone Number">
+    <div class="flex column">
+      <!-- <div class="flex row justify-content-center"> -->
         <mat-form-field appearance="outline">
-            <mat-label>Phone Number</mat-label>
-            <mat-icon matSuffix>phone</mat-icon>
-            <mat-hint>Include area code and no space</mat-hint>
-            <mat-error>{{phoneNumberErrorMessage}}</mat-error>
-            <input matInput placeholder="123 456 7890" type="tel" [formControl]="phoneNumber">
+          <mat-label>Phone Number</mat-label>
+          <mat-icon matSuffix>phone</mat-icon>
+          <mat-hint>Enter your phone number</mat-hint>
+          <mat-error>{{phoneNumberErrorMessage || 'Phone number must be entered'}}</mat-error>
+          <input matInput placeholder="123 456 7890" type="tel" [formControl]="phoneNumber">
         </mat-form-field>
+      <!-- </div> -->
+      <!-- <div class="flex row justify-content-center"> -->
+        <button mat-stroked-button matStepperNext color="primary" id="sign-in-button">SIGN IN</button>
+      <!-- </div> -->
     </div>
-    <div class="flex row justify-content-center">
-        <!-- <button mat-stroked-button color="primary" [disabled]="phoneNumber.invalid" (click)="sendLoginCode()">LOGIN</button> -->
-        <button mat-stroked-button color="primary" id="sign-in-button">SIGN IN</button>
-    </div>
-    <div class="flex row justify-content-center" *ngIf="windowRef.confirmationResult">
+  </mat-step>
+  <mat-step label="Verification Code">
+    <div class="flex column">
+      <!-- <div class="flex row justify-content-center"> -->
         <mat-form-field appearance="outline">
-            <mat-label>Verification Code</mat-label>
-            <mat-icon matSuffix>code</mat-icon>
-            <mat-hint>Enter the you you received</mat-hint>
-            <mat-error>Code is incorrect</mat-error>
-            <input matInput placeholder="123456" type="number" [(ngModel)]="verificationCode" name="code">
+          <mat-label>Verification Code</mat-label>
+          <mat-icon matSuffix>code</mat-icon>
+          <mat-hint>Enter the verification code</mat-hint>
+          <mat-error>Code is incorrect</mat-error>
+          <input matInput placeholder="123456" type="number" [(ngModel)]="verificationCode" name="code">
         </mat-form-field>
-    </div>
-    <div class="flex row justify-content-center" *ngIf="windowRef.confirmationResult">
+      <!-- </div> -->
+      <!-- <div class="flex row justify-content-center" *ngIf="windowRef.confirmationResult"> -->
         <button mat-stroked-button color="primary" (click)="verifyLoginCode()">Verify</button>
+      <!-- </div> -->
     </div>
-</div>
+  </mat-step>
+</mat-vertical-stepper>
+<!-- <div class="flex column">
+  <div class="flex row justify-content-center">
+    <mat-form-field appearance="outline">
+      <mat-label>Phone Number</mat-label>
+      <mat-icon matSuffix>phone</mat-icon>
+      <mat-hint>Include area code and no space</mat-hint>
+      <mat-error>{{phoneNumberErrorMessage}}</mat-error>
+      <input matInput placeholder="123 456 7890" type="tel" [formControl]="phoneNumber">
+    </mat-form-field>
+  </div>
+  <div class="flex row justify-content-center"> -->
+    <!-- <button mat-stroked-button color="primary" [disabled]="phoneNumber.invalid" (click)="sendLoginCode()">LOGIN</button> -->
+    <!-- <button mat-stroked-button color="primary" id="sign-in-button">SIGN IN</button>
+  </div>
+  <div class="flex row justify-content-center" *ngIf="windowRef.confirmationResult">
+    <mat-form-field appearance="outline">
+      <mat-label>Verification Code</mat-label>
+      <mat-icon matSuffix>code</mat-icon>
+      <mat-hint>Enter the you you received</mat-hint>
+      <mat-error>Code is incorrect</mat-error>
+      <input matInput placeholder="123456" type="number" [(ngModel)]="verificationCode" name="code">
+    </mat-form-field>
+  </div>
+  <div class="flex row justify-content-center" *ngIf="windowRef.confirmationResult">
+    <button mat-stroked-button color="primary" (click)="verifyLoginCode()">Verify</button>
+  </div>
+</div> -->

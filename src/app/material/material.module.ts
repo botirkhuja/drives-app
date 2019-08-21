@@ -9,6 +9,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
+import {MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+import {MatStepperModule} from '@angular/material/stepper';
 
 const exports = [
   MatButtonModule,
@@ -18,8 +22,13 @@ const exports = [
   MatIconModule,
   MatToolbarModule,
   MatSidenavModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSelectModule,
+  MatRippleModule,
   MatListModule,
-  MatCardModule
+  MatStepperModule
 ]
 
 @NgModule({
@@ -28,6 +37,9 @@ const exports = [
     CommonModule,
     ...exports,
   ],
-  exports
+  exports,
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'en-US'}
+  ]
 })
 export class MaterialModule { }

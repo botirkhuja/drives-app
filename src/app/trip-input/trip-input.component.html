@@ -1,0 +1,82 @@
+<div class="flex justify-content-center">
+  <span>Enter Trip Details</span>
+</div>
+<form class="flex column" [formGroup]="tripForm" (ngSubmit)="addNewTrip()">
+  <div class="flex row justify-content-center" *ngIf="mobile">
+    <mat-form-field appearance="outline">
+      <mat-label>Day and Time</mat-label>
+      <mat-error>Incorrect Day and Time</mat-error>
+      <input matInput type="datetime-local" formControlName="pickupDate">
+    </mat-form-field>
+  </div>
+  <div class="flex row justify-content-center">
+    <mat-form-field appearance="outline">
+      <mat-label>From</mat-label>
+      <mat-icon matSuffix>place</mat-icon>
+      <mat-hint>Pick up address</mat-hint>
+      <mat-error>Incorrect address</mat-error>
+      <input matInput placeholder="123 Main St, Brooklyn, NY" type="text" formControlName="pickup">
+    </mat-form-field>
+  </div>
+  <div class="flex row justify-content-center">
+    <mat-form-field appearance="outline">
+      <mat-label>To</mat-label>
+      <mat-icon matSuffix>place</mat-icon>
+      <mat-hint>Drop off address</mat-hint>
+      <mat-error>Incorrect address</mat-error>
+      <input matInput placeholder="Brooklyn, NY" type="text" formControlName="dropoff">
+    </mat-form-field>
+  </div>
+  <div class="flex row justify-content-center">
+    <mat-form-field appearance="outline">
+      <mat-label>Phone Number</mat-label>
+      <mat-icon matSuffix>phone</mat-icon>
+      <mat-hint>Include area code and no space</mat-hint>
+      <mat-error>Check your number again</mat-error>
+      <input matInput placeholder="123 456 7890" type="tel" formControlName="cell">
+    </mat-form-field>
+  </div>
+  <div class="flex row justify-content-center">
+    <mat-form-field appearance="outline">
+      <mat-label>Price</mat-label>
+      <mat-icon matSuffix>attach_money</mat-icon>
+      <mat-hint>Trip Price</mat-hint>
+      <mat-error>Check price again</mat-error>
+      <input matInput placeholder="100.00" type="number" formControlName="price" #priceInput>
+    </mat-form-field>
+  </div>
+  <div class="flex row justify-content-center">
+    <mat-checkbox [labelPosition]="'before'" name="tollIncluded" formControlName="tollIncluded">Toll Included ?
+    </mat-checkbox>
+  </div>
+  <div class="flex row justify-content-center" *ngIf="tripForm.value.tollIncluded">
+    <mat-form-field appearance="outline">
+      <mat-label>Toll</mat-label>
+      <mat-icon matSuffix>attach_money</mat-icon>
+      <mat-hint>Included toll amount {{priceInput.value ? 'in ' + priceInput.value : ''}}</mat-hint>
+      <mat-error>Check price again</mat-error>
+      <input matInput placeholder="15" type="number" formControlName="tollAmount">
+    </mat-form-field>
+  </div>
+  <div class="flex row justify-content-center">
+    <mat-form-field appearance="outline">
+      <mat-label>Driver</mat-label>
+      <mat-select formControlName="driverID">
+        <mat-option [value]="null">None</mat-option>
+        <mat-option *ngFor="let driver of (drivers$ | async)" [value]="driver.cell">
+          {{driver.name}}
+        </mat-option>
+      </mat-select>
+      <mat-hint>Select driver for this trip</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="flex row justify-content-center">
+    <button mat-raised-button
+      color="primary"
+      [disabled]="(tripForm.pristine && tripForm.invalid) || !(editTripId && tripForm.touched)"
+      action="submit"
+    >
+      {{editTripId ? 'Edit Trip' : 'Add New Trip'}}
+    </button>
+  </div>
+</form>

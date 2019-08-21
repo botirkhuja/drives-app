@@ -1,1 +1,21 @@
-{{drivers$ | async | json}}
+<!-- <div [ngClass]="{'pt-1': i > 0}" *ngFor="let driver of (drivers$ | async) index as i">
+  <app-driver  [driver]="driver"></app-driver>
+</div> -->
+<mat-nav-list>
+  <h3 mat-subheader>Drivers</h3>
+  <a mat-list-item *ngFor="let driver of (drivers$ | async)" [routerLink]="['/driver', driver.cell]">
+    <mat-icon mat-list-icon>person</mat-icon>
+    <span mat-line>Name: {{driver?.name}} </span>
+    <span mat-line>Car: {{driver?.car}}</span>
+    <span mat-line>Cell: {{driver?.cell}} </span>
+  </a>
+  <!-- <h3 mat-subheader>Notes</h3>
+    <mat-list-item *ngFor="let note of notes">
+      <mat-icon mat-list-icon>note</mat-icon>
+      <h4 mat-line>{{note.name}}</h4>
+      <p mat-line> {{note.updated | date}} </p>
+    </mat-list-item> -->
+</mat-nav-list>
+<!-- <mat-divider></mat-divider> -->
+<a class="w-100" *ngIf="isAdmin$ | async" mat-raised-button color="primary" [routerLink]="['/drivers', 'new']">New</a>
+

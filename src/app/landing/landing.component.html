@@ -1,8 +1,12 @@
-<div class="landing-container">
+<!-- <div class="landing-container">
   <mat-toolbar color="primary" class="landing-toolbar">
       <mat-toolbar-row>
-          <button mat-button (click)="sidenav.toggle()">
+          <button mat-icon-button (click)="sidenav.toggle()">
               <mat-icon>menu</mat-icon>
+          </button>
+          <span class="spacer"></span>
+          <button *ngIf="isAdmin$ | async" mat-icon-button (click)="addHandler()">
+              <mat-icon>add</mat-icon>
           </button>
       </mat-toolbar-row>
   </mat-toolbar>
@@ -18,4 +22,23 @@
           <router-outlet></router-outlet>
       </mat-sidenav-content>
   </mat-sidenav-container>
-</div>
+</div> -->
+<mat-toolbar color="primary" class="sticky top-0">
+    <mat-toolbar-row>
+        <a mat-icon-button [routerLink]="['/menu']" >
+            <mat-icon>menu</mat-icon>
+        </a>
+        <span class="spacer"></span>
+        <ng-container *ngFor="let action of (actionButtons | async)">
+          <button mat-icon-button (click)="actionButtonHandler(action)">
+              <mat-icon>{{action?.icon}}</mat-icon>
+          </button>
+
+        </ng-container>
+
+        <!-- <button *ngIf="isAdmin$ | async" mat-icon-button (click)="addHandler()">
+            <mat-icon>add</mat-icon>
+        </button> -->
+    </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>

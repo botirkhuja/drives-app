@@ -1,0 +1,29 @@
+<mat-card *ngIf="(driver$ | async) as driver">
+  <mat-card-header>
+    <mat-card-title>{{driver?.name}}</mat-card-title>
+    <mat-card-subtitle>{{driver?.cell}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon>directions_car</mat-icon>
+        <span> {{driver?.car}} </span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>format_list_numbered</mat-icon>
+        <span>{{(tripsCount$ | async) || 0}}</span>
+      </mat-list-item>
+      <!-- <mat-divider></mat-divider> -->
+      <mat-list-item>
+        <mat-icon mat-list-icon>money</mat-icon>
+        <span>{{ (commission$ | async) || 0 | currency }}</span>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <!-- <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions> -->
+</mat-card>
+<router-outlet></router-outlet>
+

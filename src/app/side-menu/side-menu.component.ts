@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { AppState, driverInfoSelector } from '../reducers';
+import { AppState, userDriverInfoSelector } from '../reducers';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,10 +15,9 @@ export class SideMenuComponent implements OnInit {
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
-    this.subscription = this.store.pipe( select( driverInfoSelector )).subscribe(
+    this.subscription = this.store.pipe( select( userDriverInfoSelector )).subscribe(
       driverInfo => {
         this.driverInfo = driverInfo;
-        console.log('from side menu', driverInfo);
         this.constructLinks();
       }
     )

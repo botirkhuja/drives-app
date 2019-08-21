@@ -1,0 +1,12 @@
+<mat-nav-list>
+  <ng-container *ngFor="let navigation of navigatableLinks" >
+    <a mat-list-item [routerLink]="'/'+navigation.link">
+        <span class="flex row justify-content-center w-100">
+          {{ navigation.label }}
+        </span>
+      </a>
+      <mat-divider></mat-divider>
+  </ng-container>
+
+
+ </mat-nav-list>
